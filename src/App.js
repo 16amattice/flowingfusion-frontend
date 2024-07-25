@@ -1,6 +1,6 @@
 // src/App.js
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Products from './Products';
 import Purchases from './Purchases';
 import SignIn from './SignIn';
@@ -8,10 +8,7 @@ import Register from './Register';
 import NavBar from './NavBar';
 import { auth } from './firebaseConfig';
 import { onAuthStateChanged } from 'firebase/auth';
-
-const PrivateRoute = ({ element, user }) => {
-  return user ? element : <Navigate to="/signin" />;
-};
+import Profile from './Profile'; // Assuming you have a Profile component
 
 function App() {
   const [user, setUser] = useState(null);
@@ -32,12 +29,13 @@ function App() {
     <Router>
       <div style={{ display: 'flex' }}>
         <NavBar user={user} />
-        <div style={{ marginLeft: 240, padding: '20px' }}>
+        <div style={{ marginLeft: 240, padding: '20px', width: '100%' }}>
           <Routes>
-            <Route path="/products" element={<PrivateRoute user={user} element={<Products />} />} />
-            <Route path="/purchases" element={<PrivateRoute user={user} element={<Purchases />} />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/purchases" element={<Purchases />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/profile" element={<Profile />} /> {/* Add a Profile route */}
           </Routes>
         </div>
       </div>
