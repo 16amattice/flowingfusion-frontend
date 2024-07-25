@@ -6,7 +6,8 @@ import SignIn from './SignIn';
 import Register from './Register';
 import NavBar from './NavBar';
 import SideBar from './SideBar';
-import Profile from './Profile';
+import PrivateRoute from './PrivateRoute';
+import Profile from './Profile'
 import { auth } from './firebaseConfig';
 import { onAuthStateChanged } from 'firebase/auth';
 
@@ -34,11 +35,32 @@ function App() {
         <SideBar />
         <main style={{ marginLeft: drawerWidth, padding: '20px', width: '100%', marginTop: '64px' }}>
           <Routes>
-            <Route path="/products" element={<Products />} />
-            <Route path="/purchases" element={<Purchases />} />
+            <Route
+              path="/products"
+              element={
+                <PrivateRoute user={user}>
+                  <Products />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/purchases"
+              element={
+                <PrivateRoute user={user}>
+                  <Purchases />
+                </PrivateRoute>
+              }
+            />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/profile" element={<Profile />} /> {/* Add a Profile route */}
+            <Route
+              path="/profile"
+              element={
+                <PrivateRoute user={user}>
+                  <Profile />
+                </PrivateRoute>
+              }
+            />
           </Routes>
         </main>
       </div>
