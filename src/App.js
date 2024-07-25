@@ -32,7 +32,7 @@ function App() {
       <div style={{ display: 'flex' }}>
         <NavBar user={user} />
         <SideBar />
-        <main style={{ marginLeft: drawerWidth, padding: '20px', flexGrow: 1 }}>
+        <main style={{ marginLeft: drawerWidth, padding: '20px', width: '100%', marginTop: '64px' }}>
           <Routes>
             <Route path="/products" element={<Products />} />
             <Route path="/purchases" element={<Purchases />} />
