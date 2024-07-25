@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Products from './Products';
@@ -6,9 +5,12 @@ import Purchases from './Purchases';
 import SignIn from './SignIn';
 import Register from './Register';
 import NavBar from './NavBar';
+import SideBar from './SideBar';
+import Profile from './Profile';
 import { auth } from './firebaseConfig';
 import { onAuthStateChanged } from 'firebase/auth';
-import Profile from './Profile'; // Assuming you have a Profile component
+
+const drawerWidth = 240;
 
 function App() {
   const [user, setUser] = useState(null);
@@ -29,7 +31,8 @@ function App() {
     <Router>
       <div style={{ display: 'flex' }}>
         <NavBar user={user} />
-        <div style={{ marginLeft: 240, padding: '20px', width: '100%' }}>
+        <SideBar />
+        <main style={{ marginLeft: drawerWidth, padding: '20px', flexGrow: 1 }}>
           <Routes>
             <Route path="/products" element={<Products />} />
             <Route path="/purchases" element={<Purchases />} />
@@ -37,7 +40,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} /> {/* Add a Profile route */}
           </Routes>
-        </div>
+        </main>
       </div>
     </Router>
   );
