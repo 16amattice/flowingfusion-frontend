@@ -1,3 +1,4 @@
+// src/Purchases.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Card, List, ListItem, ListItemText, Container, Typography, Grid } from '@mui/material';
@@ -14,7 +15,6 @@ const Purchases = () => {
         const response = await axios.get(`${BASE_URL}/purchases`, {
           headers: { Authorization: `Bearer ${token}` }
         });
-        console.log('API Response:', response.data);
         setPurchases(response.data);
       } catch (error) {
         console.error('There was an error fetching the purchases!', error);
