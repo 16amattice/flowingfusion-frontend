@@ -8,13 +8,20 @@ const Purchases = () => {
   const [purchases, setPurchases] = useState([]);
 
   useEffect(() => {
-    axios.get(`${BASE_URL}/purchases`)
-      .then(response => {
+    const fetchPurchases = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await axios.get(`${BASE_URL}/purchases`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        console.log('API Response:', response.data);
         setPurchases(response.data);
-      })
-      .catch(error => {
+      } catch (error) {
         console.error('There was an error fetching the purchases!', error);
-      });
+      }
+    };
+
+    fetchPurchases();
   }, []);
 
   return (

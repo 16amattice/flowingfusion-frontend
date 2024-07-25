@@ -14,7 +14,7 @@ const SignIn = () => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const idToken = await userCredential.user.getIdToken();
-      localStorage.setItem('idToken', idToken);
+      localStorage.setItem('token', idToken);
       navigate('/products');
     } catch (error) {
       console.error('Error signing in with email and password', error);
@@ -25,7 +25,7 @@ const SignIn = () => {
     try {
       const userCredential = await signInWithPopup(auth, googleProvider);
       const idToken = await userCredential.user.getIdToken();
-      localStorage.setItem('idToken', idToken);
+      localStorage.setItem('token', idToken);
       navigate('/products');
     } catch (error) {
       console.error('Error signing in with Google', error);
